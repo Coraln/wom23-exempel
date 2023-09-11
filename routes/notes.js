@@ -6,10 +6,16 @@ const prisma = new PrismaClient()
 // relativt till notes/
 router.get('/', async (req, res) => {
 
-    const notes = await prisma.notes.findMany()
+    const notes = await prisma.notes.findMany({
+       where: { userId: req.authUser.sub } 
+    })
 
     console.log("notes GET")
-    res.send({ msg: 'notes', notes: notes })
+    res.send({ 
+        msg: 'notes', 
+        notes: notes,
+        authorizedUserId: req.authUser.sub 
+    })
 })
 
 router.get('/:id', async (req, res) => {
@@ -27,7 +33,8 @@ router.post('/', async (req, res) => {
 
     const note = await prisma.notes.create({
         data: {
-            noteText: req.body.text,
+            userId: req.authUser.sub,
+            noteText: req.body.text
         },
     })
     console.log("note created:", note)

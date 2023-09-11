@@ -1,8 +1,11 @@
 const express = require('express')
+const auth = require('./middleware/auth')
 const app = express()
-const PORT = 3030
+const PORT = process.env.PORT || 3030
 
 // middleware-funktion
+
+app.use(auth)
 const myMiddleware = (req, res, next) => {
     console.log("Hello middleware")
     next()
