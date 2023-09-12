@@ -1,9 +1,6 @@
 @apiUrl = http://localhost:3030/users
 #@apiUrl = https://notes-kim.azurewebsites.net/notes
-
-
-@token = {{${{$dotenv TOKEN}}}}
-//@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImtpbSIsImlhdCI6MTUxNjIzOTAyMn0.BNUdkm-MKlXQmbaSWsZBYUeQbY3GosMU9FbwOt1YKik
+@token = {{$dotenv TOKEN}}
 
 ###
 GET {{apiUrl}}
@@ -11,25 +8,35 @@ Authorization: Bearer {{token}}
 
 
 ###
-GET {{apiUrl}}/64f9a89c3192a9bf9d0e740a
+GET {{apiUrl}}/6500459ad2c4f9f6b7da41cc
 Authorization: Bearer {{token}}
 
-###
-POST {{apiUrl}}
-Authorization: Bearer {{token}}
+### Logga in på /users/login
+POST {{apiUrl}}/login
 Content-Type: application/json
 
 {
-    "text": "My own note"
+    "email": "kimm@foo.bar",
+    "password": "Password123"
+}
+
+### skapa ny användare
+POST {{apiUrl}}
+Content-Type: application/json
+
+{
+    "email": "kimmm@foo.bar",
+    "password": "Password123"
 }
 
 ### 
-PATCH {{apiUrl}}/64f9a89c3192a9bf9d0e740a
+PATCH {{apiUrl}}/6500459ad2c4f9f6b7da41cc
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "text": "My updated note"
+    "password": "Password123"
+
 }
 
 ###

@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
     const note = await prisma.notes.create({
         data: {
             userId: req.authUser.sub,
-            noteText: req.body.text
+            noteText: req.body.text,
         },
     })
     console.log("note created:", note)
