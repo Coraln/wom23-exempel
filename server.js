@@ -17,6 +17,8 @@ app.get('/', (req, res) => {
 const usersRouter = require('./routes/users.js')
 app.use('/users', usersRouter)
 
+app.use('/public', express.static(__dirname + '/public'))
+
 // middleware-funktion, validerar jwt
 app.use(auth)
 
