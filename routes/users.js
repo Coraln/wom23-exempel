@@ -48,10 +48,15 @@ router.post('/login', async (req, res) => {
             sub: user.id, 
             email: user.email, 
             name: user.name,
-            expiresIn: '1day', 
+            expiresIn: '1d'
         }, process.env.JWT_SECRET)
 
-        res.send({token: token, msg: "Login successful", userId: user.id})
+        res.send({
+            token: token, 
+            msg: "Login successful", 
+            userId: user.id,
+            userEmail: user.email
+        })
 
     } catch (error) {
         
@@ -68,7 +73,6 @@ router.post('/', async (req, res) => {
             email: req.body.email,
             name: req.body.name,
             password: hash
-            
         },
     })
     console.log("user created:", user)

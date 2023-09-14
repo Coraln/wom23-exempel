@@ -45,6 +45,15 @@
             } catch (error) {
                 console.error('Ett fel inträffade:', error);
             }
+
+            const resJson = await res.json();
+            document.querySelector('#status').innerHTML = `
+                Välkommen ${resJson.userEmail.split('@')[0]}!
+
+                <p>Din JWT: <pre>${resJson.token}</pre></p>
+            `;
+
+            console.log(resJson);
         });
     </script>
 </body>
