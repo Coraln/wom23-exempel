@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
     try {
 
         const note = await prisma.notes.findUnique({
-            where: { id: req.params.id }
+            where: { id: parseInt(req.params.id) }
         })
 
         console.log("notes GET ONE")
@@ -55,7 +55,7 @@ router.patch('/:id', async (req, res) => {
 
     const note = await prisma.notes.update({
         where: {
-            id: req.params.id,
+            id: parseInt(req.params.id),
         },
         data: {
             noteText: req.body.text,
@@ -75,7 +75,7 @@ router.delete('/:id', async (req, res) => {
 
         const note = await prisma.notes.delete({
             where: {
-                id: req.params.id,
+                id: parseInt(req.params.id),
             }
         })
         res.send({
